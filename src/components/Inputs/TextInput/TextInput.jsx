@@ -7,7 +7,7 @@ function TextInput({ control, name, label, defaultValue = "" }) {
 
   return (
     <div className={styles.container}>
-      <InputLabel htmlFor={name}>{label}</InputLabel>
+      {label && <InputLabel htmlFor={name}>{label}</InputLabel>}
       <TextField size="small" {...field} id={name} fullWidth />
     </div>
   )
