@@ -1,7 +1,7 @@
 import React from "react"
 import { DataGrid } from "@mui/x-data-grid"
 
-function EmployeeGrid({ rows }) {
+function EmployeeGrid({ rows = [] }) {
   const columns = [
     { field: "firstName", headerName: "First Name" },
     { field: "lastName", headerName: "Last Name" },

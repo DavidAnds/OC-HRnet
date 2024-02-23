@@ -1,12 +1,12 @@
-import { TextInput } from "../components/Inputs"
-import { useForm } from "react-hook-form"
+import { Link } from "react-router-dom"
+import ViewEmployee from "../features/Employees/ViewEmployee"
 
 function EmployeeList() {
-  const { control, handleSubmit } = useForm()
-
   return (
     <div>
-      <TextInput control={control} name="name" label="Name" />
+      <h1>Current Employees</h1>
+      <ViewEmployee />
+      <Link to="/create">Home</Link>
     </div>
   )
 }
