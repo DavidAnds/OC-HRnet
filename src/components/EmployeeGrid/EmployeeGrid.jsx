@@ -1,5 +1,5 @@
 import React from "react"
-import { DataGrid } from "@mui/x-data-grid"
+import { DataGrid, GridToolbar } from "@mui/x-data-grid"
 
 function EmployeeGrid({ rows = [] }) {
   const columns = [
@@ -14,9 +14,24 @@ function EmployeeGrid({ rows = [] }) {
     { field: "zipCode", headerName: "Zip Code" },
   ]
 
+  // Ajouter des mocks data
+  // Ajouter une search Bar pour filtrer les données
+
   return (
     <div>
-      <DataGrid rows={rows} columns={columns} />
+      <DataGrid
+        rows={rows}
+        disableColumnFilter
+        disableColumnSelector
+        disableDensitySelector
+        columns={columns}
+        slots={{ toolbar: GridToolbar }}
+        slotProps={{
+          toolbar: {
+            showQuickFilter: true,
+          },
+        }}
+      />
     </div>
   )
 }

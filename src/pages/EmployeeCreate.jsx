@@ -3,10 +3,13 @@ import CreateEmployee from "../features/Employees/CreateEmployee"
 
 function EmployeeCreate() {
   return (
-    <div>
+    <div className="container">
       <div>
-        <Link to="/">View Current Employee</Link>
-        <h1>Create Employee</h1>
+        <h1>HRnet</h1>
+        <Link to="/employees" className="link_top">
+          View Current Employee
+        </Link>
+        <h2>Create Employee</h2>
       </div>
       <CreateEmployee />
     </div>

@@ -3,10 +3,12 @@ import ViewEmployee from "../features/Employees/ViewEmployee"
 
 function EmployeeList() {
   return (
-    <div>
+    <div className="container">
       <h1>Current Employees</h1>
       <ViewEmployee />
-      <Link to="/create">Home</Link>
+      <Link to="/" className="link">
+        Home
+      </Link>
     </div>
   )
 }
