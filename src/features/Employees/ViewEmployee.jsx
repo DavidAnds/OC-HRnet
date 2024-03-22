@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 function ViewEmployee() {
   const employees = useSelector((state) => state.employees)
 
+  console.log(employees)
   return (
     <>
       <EmployeeGrid rows={employees} />
