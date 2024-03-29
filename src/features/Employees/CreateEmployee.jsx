@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import DatePickerInput from "../../components/Inputs/DatePickerInput/DatePickerInput"
 import TextInput from "../../components/Inputs/TextInput/TextInput"
@@ -9,7 +9,12 @@ import Popup from "../../components/Popup/Popup"
 
 const CreateEmployee = () => {
   const [open, setOpen] = useState(false)
-  const { control, handleSubmit, reset } = useForm()
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm()
 
   const employees = useSelector((state) => state.employees)
   const dispatch = useDispatch()
@@ -264,23 +269,26 @@ const CreateEmployee = () => {
     },
   ]
   const departments = ["Sales", "Marketing", "Engineering", "Human Resources", "Legal"]
+
   return (
     <form>
+      <p className="info">fields preceded by * are required</p>
       <Popup open={open} onClose={() => setOpen(false)} text={"Employee created successfully"} />
       <div className="text">
-        <TextInput control={control} name="firstName" label="First Name" />
-        <TextInput control={control} name="lastName" label="Last Name" />
+        <TextInput control={control} name="firstName" label="First Name" required />
+        <TextInput control={control} name="lastName" label="Last Name" required />
         <DatePickerInput control={control} name="dateOfBirth" label="Date of Birth" />
         <DatePickerInput control={control} name="startDate" label="StartDate" />
       </div>
       <div className="adress">
         <h2 className="adress_title">Adress</h2>
-        <TextInput control={control} name="street" label="Street" />
-        <TextInput control={control} name="city" label="City" />
+        <TextInput control={control} name="street" label="Street" required />
+        <TextInput control={control} name="city" label="City" required />
         <SelectInput
           control={control}
           name="state"
           label="State"
+          defaultValue="AL"
           options={states.map((state) => ({ label: state.name, value: state.abbreviation }))}
         />
         <TextInput control={control} name="zipCode" label="Zip Code" />
@@ -289,9 +297,11 @@ const CreateEmployee = () => {
         control={control}
         name="department"
         label="Department"
+        defaultValue="Sales"
         options={departments.map((department) => ({ label: department, value: department }))}
       />
-      <button className="save" onClick={handleSubmit(onSubmit)}>
+
+      <button className="save" disabled={!isValid} onClick={handleSubmit(onSubmit)}>
         Save
       </button>
     </form>

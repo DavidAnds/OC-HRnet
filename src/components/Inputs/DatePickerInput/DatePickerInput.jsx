@@ -5,12 +5,17 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs/"
 import { useController } from "react-hook-form"
 import styles from "../Inputs.module.css"
 
-function DatePickerInput({ control, name, label, defaultValue }) {
-  const { field } = useController({ control, name, defaultValue })
+function DatePickerInput({ control, name, label, defaultValue, required = false }) {
+  const { field } = useController({ control, name, defaultValue, rules: { required } })
 
   return (
     <div className={styles.container}>
-      {label && <InputLabel htmlFor={name}>{label}</InputLabel>}
+      {label && (
+        <InputLabel htmlFor={name}>
+          {required ? "*" : ""}
+          {label}
+        </InputLabel>
+      )}
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker {...field} />
       </LocalizationProvider>
